@@ -1,0 +1,88 @@
+---
+import '../../index.css';
+import { blogPosts } from '../../data/blogPosts';
+
+const pageTitle = 'Sacred Insights | Lunar Light Awakening Blog';
+const pageDescription =
+  'Read the Lunar Light Awakening blog, including stories about the shop, oracle readings, crystals, and intuitive wellness.';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDescription} />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>{pageTitle}</title>
+  </head>
+  <body class="bg-celestial-dark text-white font-sans selection:bg-gold selection:text-celestial-dark">
+    <header class="border-b border-white/10 bg-celestial-dark/95">
+      <nav class="container mx-auto flex items-center justify-between px-6 py-5">
+        <a href="/" class="flex items-center gap-3 text-gold-light">
+          <img src="/logo.png" alt="Lunar Light Awakening" class="h-10 w-10 object-contain" />
+          <span class="font-display text-lg tracking-[0.2em]">LUNAR LIGHT</span>
+        </a>
+        <a href="/#blog" class="text-xs uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-gold">
+          Back Home
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="relative overflow-hidden border-b border-white/10 py-24">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(212,175,55,0.16),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(79,70,229,0.22),transparent_30%)]"></div>
+        <div class="container relative mx-auto px-6 text-center">
+          <p class="mb-5 text-xs uppercase tracking-[0.35em] text-gold">Lunar Light Awakening</p>
+          <h1 class="font-display text-4xl text-gold-light md:text-6xl">Sacred Insights</h1>
+          <p class="mx-auto mt-6 max-w-2xl font-serif text-xl italic leading-relaxed text-white/70">
+            Wisdom, store stories, and gentle practices for the body, mind, and spirit.
+          </p>
+        </div>
+      </section>
+
+      <section class="bg-white py-20 text-celestial-dark">
+        <div class="container mx-auto grid gap-10 px-6 md:grid-cols-3">
+          {
+            blogPosts.map((post) => (
+              <a
+                href={`/blog/${post.slug}/`}
+                class="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <div class="relative aspect-video overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.imageAlt}
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    referrerpolicy="no-referrer"
+                  />
+                  <span class="absolute left-4 top-4 rounded-full bg-gold px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-celestial-dark">
+                    {post.category}
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col p-7">
+                  <div class="mb-4 flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.2em] text-gray-400">
+                    <time>{post.date}</time>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h2 class="font-display text-2xl leading-tight text-celestial-dark transition-colors group-hover:text-gold">
+                    {post.title}
+                  </h2>
+                  <p class="mt-4 flex-1 font-serif text-base leading-relaxed text-gray-600">{post.excerpt}</p>
+                  <span class="mt-8 inline-flex items-center gap-3 border-t border-gray-100 pt-5 text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Read Post
+                  </span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-celestial-dark px-6 py-10 text-center">
+      <p class="text-xs uppercase tracking-[0.25em] text-white/35">
+        Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
+      </p>
+    </footer>
+  </body>
+</html>

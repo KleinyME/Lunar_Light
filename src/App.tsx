@@ -1,6 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Moon, Star, Sparkles, MapPin, Phone, Mail, Instagram, Facebook, ArrowRight, Gem, Book, Flower2, Heart } from 'lucide-react';
+import { Menu, X, Moon, Star, Sparkles, MapPin, Phone, Mail, ArrowRight, Gem, Book, Flower2, Heart, ExternalLink } from 'lucide-react';
+import { blogPosts } from './data/blogPosts';
+
+const FACEBOOK_URL = 'https://www.facebook.com/lunarlightawakening';
+const EMAIL = 'lunarlightawakening@gmail.com';
+const PHONE = '715-581-7317';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=121%20Skelly%20Street%2C%20Schofield%2C%20WI%2054476';
+const CONTACT_MAILTO = `mailto:${EMAIL}`;
+
+const scrollToSectionId = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    window.scrollTo({
+      top: element.offsetTop - 80,
+      behavior: 'smooth',
+    });
+  }
+};
+
+const scrollToSectionLink = (e: React.MouseEvent<HTMLElement>, href: string) => {
+  e.preventDefault();
+  scrollToSectionId(href.replace('#', ''));
+};
 
 // --- Shared Components ---
 
@@ -52,20 +74,7 @@ const Navbar = () => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const id = href.replace('#', '');
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSectionId(href.replace('#', ''));
     setIsMenuOpen(false);
   };
 
@@ -91,19 +100,20 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <button 
+          <a
+            href="#practitioners"
             onClick={(e) => {
               e.preventDefault();
-              scrollToSection(e as any, '#practitioners');
+              scrollToSection(e, '#practitioners');
             }}
             className="px-6 py-2 border border-gold/50 text-gold hover:bg-gold hover:text-celestial-dark transition-all rounded-full text-[10px] uppercase tracking-widest"
           >
             Book Service
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle navigation menu">
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -115,7 +125,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-celestial-dark border-t border-white/10 py-8 px-6 flex flex-col gap-6 md:hidden shadow-2xl"
+            className="absolute top-full left-0 w-full bg-celestial-dark border-t border-white/10 py-8 px-6 flex flex-col gap-6 lg:hidden shadow-2xl"
           >
             {navLinks.map((link) => (
               <a 
@@ -182,8 +192,6 @@ const Hero = () => {
           <div className="relative p-12 rounded-full border border-gold/20 flex items-center justify-center bg-celestial-dark/30 backdrop-blur-sm">
             <div className="absolute inset-0 rounded-full border border-gold/40 animate-pulse" />
             
-            {/* User-requested Logo Placeholder */}
-            {/* Note: User should place their logo image at public/logo.png */}
             <div className="w-64 h-64 sm:w-80 sm:h-80 flex flex-col items-center justify-center text-gold-light">
               <img 
                 src="/logo.png" 
@@ -224,8 +232,7 @@ const Hero = () => {
             <button 
               onClick={(e) => {
                 e.preventDefault();
-                const el = document.getElementById('merchandise');
-                if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+                scrollToSectionId('merchandise');
               }}
               className="px-10 py-4 bg-gold text-celestial-dark font-sans text-sm uppercase tracking-widest rounded-full hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]"
             >
@@ -234,8 +241,7 @@ const Hero = () => {
             <button 
               onClick={(e) => {
                 e.preventDefault();
-                const el = document.getElementById('practitioners');
-                if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+                scrollToSectionId('practitioners');
               }}
               className="px-10 py-4 border border-white/20 text-white font-sans text-sm uppercase tracking-widest rounded-full hover:bg-white hover:text-celestial-dark transition-all"
             >
@@ -261,7 +267,7 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section className="py-24 bg-white text-celestial-dark">
+    <section className="py-24 bg-white text-celestial-dark" id="about">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
           <div className="lg:w-1/2">
@@ -272,10 +278,9 @@ const About = () => {
               className="relative p-2"
             >
               <img 
-                src="https://images.unsplash.com/photo-1567015545594-5ef861c80f68?auto=format&fit=crop&q=80&w=1200" 
-                alt="Lunar Light Sanctuary" 
-                className="rounded-2xl shadow-2xl relative z-10"
-                referrerPolicy="no-referrer"
+                src="/about/ann.png" 
+                alt="Ann from Lunar Light Awakening" 
+                className="rounded-2xl shadow-2xl relative z-10 w-full max-h-[620px] object-cover object-top"
               />
               <div className="absolute -top-4 -left-4 w-full h-full border border-gold rounded-2xl z-0" />
             </motion.div>
@@ -293,9 +298,12 @@ const About = () => {
                 We strive to provide a peaceful, welcoming environment where customers can come to shop, learn, heal, and grow! Whether you're seeking a rare crystal for aesthetic enjoyment or looking for a transformative workshop, we are here to support your awakening.
               </p>
             </div>
-            <button className="mt-10 flex items-center gap-4 text-gold hover:text-celestial-dark transition-all font-display tracking-widest border-b border-gold pb-2 group">
+            <a
+              href="/blog/the-heart-of-lunar-light-awakening/"
+              className="mt-10 inline-flex items-center gap-4 text-gold hover:text-celestial-dark transition-all font-display tracking-widest border-b border-gold pb-2 group"
+            >
               Learn More About Our Journey <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -328,7 +336,7 @@ const Offerings = () => {
     {
       title: "Artisanal Treasures",
       icon: <Flower2 className="w-8 h-8" />,
-      description: "Jewelry, room décor, local art, apparel, and curated card decks.",
+      description: "Jewelry, room decor, local art, apparel, and curated card decks.",
       items: ["Dainty Pendants", "Tapestries", "Oracle Decks", "Handmade Soap"]
     }
   ];
@@ -371,30 +379,7 @@ const Offerings = () => {
 // --- Blog ---
 
 const Blog = () => {
-  const categories = ["Wisdom", "Stones", "Rituals", "Wellness"];
-  const posts = [
-    {
-      title: "Harnessing the Full Moon's Energy",
-      excerpt: "Discover the ancient rituals that align your spirit with the lunar cycle for profound clarity.",
-      category: "Rituals",
-      date: "May 15, 2026",
-      image: "https://images.unsplash.com/photo-1532693322450-2cb5c511067d?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      title: "Crystal Care: Cleansing and Charging",
-      excerpt: "Learn why maintaining your stones' vibration is essential for their energetic efficacy.",
-      category: "Stones",
-      date: "May 10, 2026",
-      image: "https://images.unsplash.com/photo-1567015545594-5ef861c80f68?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      title: "Introduction to Sound Healing",
-      excerpt: "How frequency and vibration can recalibrate your nervous system and promote deep peace.",
-      category: "Wellness",
-      date: "May 5, 2026",
-      image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800"
-    }
-  ];
+  const categories = ["Store Stories", "Oracle Readings", "Crystals"];
 
   return (
     <section className="py-24 bg-celestial-dark" id="blog">
@@ -404,27 +389,28 @@ const Blog = () => {
         {/* Categories Navigation */}
         <div className="flex flex-wrap justify-center gap-4 mb-16">
           {categories.map((cat, i) => (
-            <button key={i} className="px-6 py-2 rounded-full border border-white/10 text-white/60 hover:text-gold hover:border-gold transition-all text-xs uppercase tracking-widest glass">
+            <span key={i} className="px-6 py-2 rounded-full border border-white/10 text-white/60 text-xs uppercase tracking-widest glass">
               {cat}
-            </button>
+            </span>
           ))}
         </div>
 
         {/* Recent Posts */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {posts.map((post, i) => (
-            <motion.article 
+          {blogPosts.map((post, i) => (
+            <motion.a
               key={i}
+              href={`/blog/${post.slug}/`}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group cursor-pointer"
+              className="group"
             >
               <div className="relative overflow-hidden rounded-2xl aspect-video mb-6">
                 <img 
                   src={post.image} 
-                  alt={post.title} 
+                  alt={post.imageAlt} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
@@ -435,7 +421,7 @@ const Blog = () => {
               <div className="space-y-4">
                 <time className="text-white/40 text-xs uppercase tracking-widest">{post.date}</time>
                 <h3 className="font-display text-2xl text-gold-light group-hover:text-gold transition-colors leading-tight">
-                  {post.title}
+                  {post.shortTitle}
                 </h3>
                 <p className="font-serif text-white/60 text-sm leading-relaxed line-clamp-2">
                   {post.excerpt}
@@ -444,14 +430,14 @@ const Blog = () => {
                   Read More <ArrowRight className="w-3 h-3" />
                 </div>
               </div>
-            </motion.article>
+            </motion.a>
           ))}
         </div>
 
         <div className="text-center mt-16">
-          <button className="text-white/40 hover:text-gold transition-colors uppercase tracking-[0.3em] text-xs flex items-center gap-3 mx-auto">
+          <a href="/blog/" className="text-white/40 hover:text-gold transition-colors uppercase tracking-[0.3em] text-xs inline-flex items-center gap-3 mx-auto">
             View All Wisdom <ArrowRight size={14} />
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -461,27 +447,24 @@ const Blog = () => {
 // --- Events ---
 
 const Events = () => {
-  const workshops = [
+  const eventPaths = [
     {
-      date: "May 22",
-      time: "6:00 PM - 8:00 PM",
-      title: "Full Moon Journaling & Ritual",
-      description: "Join us for an evening of reflection, release, and manifestation as we harness the power of the Full Moon.",
-      price: "$25"
+      title: "Classes & Workshops",
+      description: "Class dates change as practitioners and community partners schedule new gatherings.",
+      cta: "Ask About Dates",
+      href: "#contact"
     },
     {
-      date: "June 05",
-      time: "10:00 AM - 12:00 PM",
-      title: "Crystal Basics 101",
-      description: "Ever wonder why you're drawn to certain stones? Learn how to select, cleanse, and use crystals in your daily life.",
-      price: "$30"
+      title: "Host in the Classroom",
+      description: "Lunar Light offers classroom space for aligned wellness teachers and community gatherings.",
+      cta: "Ask About Space",
+      href: `${CONTACT_MAILTO}?subject=Classroom%20space%20inquiry`
     },
     {
-      date: "June 12",
-      time: "7:00 PM - 8:30 PM",
-      title: "Guided Sound Bath Meditation",
-      description: "Immerse yourself in the healing vibrations of crystal singing bowls and gongs for deep relaxation.",
-      price: "$35"
+      title: "Register for an Event",
+      description: "Most events have limited space, so registration is handled directly through the shop or the listed practitioner.",
+      cta: "Contact the Shop",
+      href: `${CONTACT_MAILTO}?subject=Event%20registration%20question`
     }
   ];
 
@@ -490,38 +473,37 @@ const Events = () => {
       <div className="container mx-auto px-6">
         <SectionHeading subtitle="Shop, learn, heal, and grow together">Workshops & Classes</SectionHeading>
         
-        <div className="max-w-5xl mx-auto space-y-6">
-          {workshops.map((event, idx) => (
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {eventPaths.map((event, idx) => (
             <motion.div 
               key={idx}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row items-center border border-gray-100 rounded-3xl p-8 hover:shadow-xl transition-all group bg-gray-50/50"
+              transition={{ delay: idx * 0.1 }}
+              className="border border-gray-100 rounded-3xl p-8 hover:shadow-xl transition-all group bg-gray-50/50 flex flex-col"
             >
-              <div className="md:w-1/4 text-center md:text-left mb-6 md:mb-0">
-                <div className="text-3xl font-display text-gold mb-1">{event.date}</div>
-                <div className="text-xs uppercase tracking-widest text-gray-400">{event.time}</div>
+              <div className="w-12 h-12 rounded-full bg-gold/10 text-gold flex items-center justify-center mb-8">
+                <Moon className="w-5 h-5" />
               </div>
-              <div className="md:w-2/4 px-0 md:px-8 text-center md:text-left">
-                <h3 className="text-2xl font-display text-celestial-dark mb-3 group-hover:text-gold transition-colors">{event.title}</h3>
-                <p className="font-serif text-gray-600 text-sm italic">{event.description}</p>
-              </div>
-              <div className="md:w-1/4 flex flex-col items-center md:items-end mt-6 md:mt-0">
-                <div className="text-xl font-display text-celestial-dark mb-4">{event.price}</div>
-                <button className="px-6 py-2 bg-celestial-dark text-white rounded-full text-[10px] uppercase tracking-widest hover:bg-gold transition-all">
-                  Register Now
-                </button>
-              </div>
+              <h3 className="text-2xl font-display text-celestial-dark mb-4 group-hover:text-gold transition-colors">{event.title}</h3>
+              <p className="font-serif text-gray-600 text-sm italic leading-relaxed mb-8 flex-grow">{event.description}</p>
+              <a
+                href={event.href}
+                onClick={event.href.startsWith('#') ? (e) => scrollToSectionLink(e, event.href) : undefined}
+                className="inline-flex items-center gap-3 text-xs uppercase tracking-widest text-gold border-b border-gold/50 pb-1 group-hover:border-gold"
+              >
+                {event.cta} <ArrowRight className="w-3 h-3" />
+              </a>
             </motion.div>
           ))}
         </div>
         
         <div className="text-center mt-16">
-          <p className="font-serif text-gray-500 mb-6 italic">Interested in hosting a class in our classroom space?</p>
-          <button className="text-gold font-display text-xs tracking-widest border-b border-gold pb-1 hover:text-celestial-dark hover:border-celestial-dark transition-all">
-            Inquire About Space Rental
-          </button>
+          <p className="font-serif text-gray-500 mb-6 italic">Dates move quickly; contact the shop for the current class and workshop schedule.</p>
+          <a href="#contact" onClick={(e) => scrollToSectionLink(e, '#contact')} className="text-gold font-display text-xs tracking-widest border-b border-gold pb-1 hover:text-celestial-dark hover:border-celestial-dark transition-all">
+            Contact the Shop
+          </a>
         </div>
       </div>
     </section>
@@ -530,25 +512,81 @@ const Events = () => {
 
 // --- Practitioners ---
 
+type Practitioner = {
+  name: string;
+  role: string;
+  image?: string;
+  services: string[];
+  bio: string[];
+  website?: string;
+  websiteLabel?: string;
+};
+
 const Practitioners = () => {
-  const team = [
+  const [selectedMember, setSelectedMember] = useState<Practitioner | null>(null);
+
+  useEffect(() => {
+    if (!selectedMember) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedMember(null);
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [selectedMember]);
+
+  const team: Practitioner[] = [
     {
-      name: "Seraphina Moon",
-      role: "Reiki Master & Intuitive",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600",
-      specialty: "Energy alignment and chakra balancing."
+      name: "Lisa Bernarde",
+      role: "Graceful Guidance",
+      image: "/practitioners/lisa-bernarde.png",
+      services: ["Reiki", "Quantum Healing", "Hypnotherapy", "Bioresonance Healing"],
+      bio: [
+        "Lisa brings deep compassion to her work and supports clients through Reiki, quantum healing, hypnotherapy, bioresonance, and vibrational sound practices.",
+        "Her path began with QHHT training and expanded into Usui Reiki Master Teacher work, animal Reiki, and other modalities that help people move toward peace and betterment."
+      ],
+      website: "https://www.gracefulguidancelisa.com",
+      websiteLabel: "Graceful Guidance"
     },
     {
-      name: "Arlo Stone",
-      role: "Crystal Healing Practitioner",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600",
-      specialty: "Using geological vibrations for physical wellness."
+      name: "Heidi Kleinschmidt",
+      role: "Your Love from Within",
+      image: "/practitioners/heidi-kleinschmidt.png",
+      services: ["Energy Healing", "Emotional Clearing", "Somatic Movement Coaching", "Brainspotting"],
+      bio: [
+        "Heidi helps clients find balance, energy, and happiness through holistic mind-body-spirit work shaped by her background as a counselor with a Native Tribe and her study with shamanic and quantum energy teachers.",
+        "Her sessions may include energy clearing on a Rainbow Chakra PEMF InfraMat, Emotion Code emotional clearing, individualized somatic movement coaching, and Brainspotting for trauma, anxiety, fears, and other stored experiences."
+      ],
+      website: "https://yourlovefromwithin.com",
+      websiteLabel: "Your Love from Within"
     },
     {
-      name: "Luna Vance",
-      role: "Sound Alchemist",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
-      specialty: "Harmonic frequency therapy and vocal toning."
+      name: "Andy Colton",
+      role: "Myofascial Release",
+      image: "/practitioners/andy-colton.png",
+      services: ["Myofascial Release", "Craniosacral Therapy"],
+      bio: [
+        "Andy has been a bodyworker for more than a decade and specializes in the John F. Barnes approach to Myofascial Release.",
+        "His work focuses on slow, sustained fascial release, deep listening, and helping clients feel safer, more fluid, and more connected in their bodies."
+      ]
+    },
+    {
+      name: "Mang Xiong",
+      role: "Sacred Healing with Mang",
+      services: ["Hmong Shaman", "Certified Reiki", "Divination", "Oracle card readings"],
+      bio: [
+        "Mang offers spiritual and energetic support through Hmong shamanic practice, Reiki, divination, energy healing, and oracle card readings.",
+        "Sessions are centered on intuitive guidance, clearing, and reconnection for clients seeking support on their healing path."
+      ],
+      website: "https://www.facebook.com/p/Sacred-Healing-With-Mang-61572473406449/",
+      websiteLabel: "Sacred Healing with Mang"
     }
   ];
 
@@ -557,7 +595,7 @@ const Practitioners = () => {
       <div className="container mx-auto px-6">
         <SectionHeading subtitle="Alternative health services in our healing spaces" light>Our Practitioners</SectionHeading>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {team.map((member, i) => (
             <motion.div 
               key={i}
@@ -565,34 +603,133 @@ const Practitioners = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2 }}
-              className="group text-center"
+              className="group text-center glass rounded-3xl p-8"
             >
-              <div className="relative mb-8 mx-auto w-64 h-64 lg:w-72 lg:h-72">
+              <div className="relative mb-8 mx-auto w-36 h-36">
                 <div className="absolute inset-4 rounded-full border border-gold/20 -rotate-6 group-hover:rotate-6 transition-transform duration-700" />
-                <div className="absolute inset-0 rounded-full overflow-hidden border border-gold/40">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
+                <div className="absolute inset-0 rounded-full overflow-hidden border border-gold/40 bg-white/5 flex items-center justify-center">
+                  {'image' in member && member.image ? (
+                    <img
+                      src={member.image}
+                      alt={`${member.name}, ${member.role}`}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <Sparkles className="w-12 h-12 text-gold" />
+                  )}
                 </div>
                 <div className="absolute -bottom-2 -right-2 bg-celestial-dark p-3 rounded-full border border-gold/30">
-                  <Sparkles className="w-5 h-5 text-gold animate-pulse" />
+                  <Heart className="w-5 h-5 text-gold" />
                 </div>
               </div>
               <h3 className="text-2xl font-display text-gold-light mb-2">{member.name}</h3>
               <p className="text-xs uppercase tracking-[0.2em] text-gold/60 mb-4">{member.role}</p>
-              <p className="font-serif text-white/50 text-sm leading-relaxed max-w-xs mx-auto">
-                {member.specialty}
-              </p>
-              <button className="mt-8 px-6 py-2 border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-white/40 hover:text-gold hover:border-gold transition-all">
-                View Schedule
+              <ul className="font-serif text-white/50 text-sm leading-relaxed max-w-xs mx-auto space-y-1 min-h-28">
+                {member.services.map((service) => (
+                  <li key={service}>{service}</li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => setSelectedMember(member)}
+                className="mt-8 inline-flex px-6 py-2 border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-white/40 hover:text-gold hover:border-gold transition-all"
+                aria-haspopup="dialog"
+              >
+                View Details
               </button>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedMember && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-celestial-dark/85 px-4 py-8 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedMember(null)}
+            role="presentation"
+          >
+            <motion.div
+              className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-gold/20 bg-white text-celestial-dark shadow-2xl"
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+              onClick={(event) => event.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="practitioner-dialog-title"
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedMember(null)}
+                className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-celestial-dark/10 bg-white/90 text-celestial-dark shadow-sm transition-colors hover:border-gold hover:text-gold"
+                aria-label="Close practitioner details"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="relative min-h-80 overflow-hidden bg-celestial-dark">
+                  {selectedMember.image ? (
+                    <img
+                      src={selectedMember.image}
+                      alt={`${selectedMember.name}, ${selectedMember.role}`}
+                      className="h-full min-h-80 w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full min-h-80 items-center justify-center">
+                      <Sparkles className="h-20 w-20 text-gold" />
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-celestial-dark/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="mb-2 text-xs uppercase tracking-[0.3em] text-gold">{selectedMember.role}</p>
+                    <h3 id="practitioner-dialog-title" className="font-display text-4xl text-gold-light">
+                      {selectedMember.name}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="space-y-8 p-8 md:p-10">
+                  <div>
+                    <h4 className="mb-4 font-display text-xs uppercase tracking-[0.3em] text-gold">Services</h4>
+                    <div className="flex flex-wrap gap-3">
+                      {selectedMember.services.map((service) => (
+                        <span key={service} className="rounded-full border border-gold/25 px-4 py-2 text-xs uppercase tracking-widest text-celestial-dark/70">
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-5 font-serif text-lg leading-relaxed text-gray-700">
+                    {selectedMember.bio.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+
+                  {selectedMember.website && (
+                    <div className="flex flex-col gap-3 border-t border-gray-100 pt-8 sm:flex-row">
+                      <a
+                        href={selectedMember.website}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-3 rounded-full bg-celestial-dark px-6 py-3 text-xs uppercase tracking-widest text-white transition-all hover:bg-gold hover:text-celestial-dark"
+                      >
+                        Visit {selectedMember.websiteLabel} <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
@@ -604,25 +741,25 @@ const Marketplace = () => {
     {
       title: "Crystal Sanctuary",
       subtitle: "Tumbled, Raw & Freeform",
-      image: "https://images.unsplash.com/photo-1596431940984-754641662973?auto=format&fit=crop&q=80&w=800",
+      image: "/marketplace/crystal-sanctuary.jpg",
       description: "From raw clusters to polished points, discover stones curated for their unique energy."
     },
     {
       title: "Wearable Spirit",
       subtitle: "Stone Jewelry",
-      image: "https://images.unsplash.com/photo-1629227316860-62961e604f4c?auto=format&fit=crop&q=80&w=800",
+      image: "/marketplace/wearable-spirit.png",
       description: "Locally created pieces including gorgeous opal jewelry from Opal Gems Crafted."
     },
     {
       title: "Healing Herbs",
       subtitle: "Alice's Rabbit Whole",
-      image: "https://images.unsplash.com/photo-1515250436402-990a43063fbc?auto=format&fit=crop&q=80&w=800",
+      image: "/marketplace/healing-herbs.png",
       description: "Botanical salves, sprays, and teas to support your physical and energetic body."
     },
     {
       title: "Sacred Space",
       subtitle: "Decor & Oils",
-      image: "https://images.unsplash.com/photo-1614030424754-24d9e9653069?auto=format&fit=crop&q=80&w=800",
+      image: "/marketplace/sacred-space.png",
       description: "Sun's Eye oils, sage bundles, and palo santo to clear and uplift your environment."
     }
   ];
@@ -638,13 +775,15 @@ const Marketplace = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
           {collections.map((col, i) => (
-            <motion.div 
+            <motion.a
               key={i}
+              href="#contact"
+              onClick={(e) => scrollToSectionLink(e, '#contact')}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex flex-col md:flex-row gap-8 items-center group cursor-pointer"
+              className="flex flex-col md:flex-row gap-8 items-center group"
             >
               <div className="w-full md:w-1/2 aspect-square overflow-hidden rounded-3xl shadow-2xl relative">
                 <img 
@@ -663,11 +802,11 @@ const Marketplace = () => {
                 </p>
                 <div className="pt-2">
                   <span className="text-xs uppercase tracking-widest border-b border-gold/50 pb-1 text-celestial-dark/60 group-hover:text-gold group-hover:border-gold transition-all">
-                    Discover Items
+                    Ask About Items
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 
@@ -701,7 +840,7 @@ const Contact = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
           <div className="lg:w-1/2 w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-700">
-            {/* Google Map Embed Placeholder with stylized overlay */}
+            {/* Embedded map for the Schofield storefront. */}
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.313426732958!2d-89.60943892354832!3d44.912644271032895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8800049495acb627%3A0xe54dca7cc203c623!2s121%20Skelly%20St%2C%20Schofield%2C%20WI%2054476!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
               className="w-full h-full border-0" 
@@ -728,23 +867,23 @@ const Contact = () => {
               <div className="space-y-4">
                 <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Connect</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
-                  (715) 581-7317<br />
-                  lunarlightawakening@gmail.com
+                  <a href={`tel:+1${PHONE.replaceAll('-', '')}`} className="hover:text-gold transition-colors">(715) 581-7317</a><br />
+                  <a href={CONTACT_MAILTO} className="hover:text-gold transition-colors">{EMAIL}</a>
                 </p>
               </div>
               <div className="sm:col-span-2 space-y-4">
                 <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Hours</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
-                  Tuesday – Saturday: 10:00 AM – 6:00 PM<br />
-                  Sunday – Monday: Closed
+                  Tuesday - Saturday: 10:00 AM - 6:00 PM<br />
+                  Sunday - Monday: Closed
                 </p>
               </div>
             </div>
             
             <div className="pt-6">
-              <button className="px-10 py-4 bg-celestial-dark text-white rounded-full text-xs uppercase tracking-widest hover:bg-gold transition-all shadow-xl">
+              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex px-10 py-4 bg-celestial-dark text-white rounded-full text-xs uppercase tracking-widest hover:bg-gold transition-all shadow-xl">
                 Get Directions
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -754,6 +893,8 @@ const Contact = () => {
 };
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+
   const navLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const id = href.replace('#', '');
@@ -779,11 +920,11 @@ const Footer = () => {
               "Striving to provide a peaceful, welcoming environment where customers can come to shop, learn, heal, and grow!"
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:border-gold hover:text-gold transition-all">
-                <Instagram size={18} />
+              <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:border-gold hover:text-gold transition-all font-display text-sm" aria-label="Lunar Light Awakening on Facebook">
+                f
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:border-gold hover:text-gold transition-all">
-                <Facebook size={18} />
+              <a href={CONTACT_MAILTO} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:border-gold hover:text-gold transition-all" aria-label="Email Lunar Light Awakening">
+                <Mail size={18} />
               </a>
             </div>
           </div>
@@ -807,11 +948,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="text-gold shrink-0 w-5 h-5" />
-                <span>(715) 581-7317</span>
+                <a href={`tel:+1${PHONE.replaceAll('-', '')}`} className="hover:text-gold transition-colors">(715) 581-7317</a>
               </li>
               <li className="flex items-center gap-4">
                 <Mail className="text-gold shrink-0 w-5 h-5" />
-                <span className="text-sm">lunarlightawakening@gmail.com</span>
+                <a href={CONTACT_MAILTO} className="text-sm hover:text-gold transition-colors">{EMAIL}</a>
               </li>
             </ul>
           </div>
@@ -821,22 +962,33 @@ const Footer = () => {
             <p className="text-white/50 text-sm mb-6 leading-relaxed">
               Join our mailing list to receive lunar updates, new stones arrivals, and event details.
             </p>
-            <div className="flex gap-2">
+            <form
+              className="flex gap-2"
+              onSubmit={(event) => {
+                event.preventDefault();
+                const subject = encodeURIComponent('Mailing list signup');
+                const body = encodeURIComponent(`Please add ${email} to the Lunar Light Awakening mailing list.`);
+                window.location.href = `${CONTACT_MAILTO}?subject=${subject}&body=${body}`;
+              }}
+            >
               <input 
                 type="email" 
                 placeholder="Your email" 
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
                 className="bg-white/5 border border-white/10 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-gold transition-all flex-grow"
               />
-              <button className="w-12 h-12 rounded-full bg-gold text-celestial-dark flex items-center justify-center hover:bg-gold-light transition-all shrink-0">
+              <button type="submit" className="w-12 h-12 rounded-full bg-gold text-celestial-dark flex items-center justify-center hover:bg-gold-light transition-all shrink-0" aria-label="Join mailing list">
                 <Sparkles size={18} />
               </button>
-            </div>
+            </form>
           </div>
         </div>
 
         <div className="pt-12 border-t border-white/5 text-center">
           <p className="text-white/30 text-xs uppercase tracking-[0.2em]">
-            © {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
+            Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
           </p>
         </div>
       </div>
@@ -854,10 +1006,10 @@ export default function App() {
         <Hero />
         <About />
         <Offerings />
+        <Marketplace />
         <Events />
         <Practitioners />
         <Blog />
-        <Marketplace />
         <Contact />
         
         {/* Testimonial/Quote */}
@@ -874,10 +1026,10 @@ export default function App() {
             >
               <Sparkles className="text-gold w-12 h-12 mx-auto mb-10" />
               <blockquote className="font-serif italic text-3xl md:text-5xl text-gold-light leading-snug mb-10">
-                "A sanctuary of light and peace in the heart of Schofield. The moment you walk in, your soul feels at home."
+                "A peaceful, welcoming environment where customers can come to shop, learn, heal, and grow."
               </blockquote>
               <cite className="font-display tracking-[0.3em] text-white/40 uppercase text-sm block">
-                — A Local Seeker
+                Lunar Light Awakening
               </cite>
             </motion.div>
           </div>
