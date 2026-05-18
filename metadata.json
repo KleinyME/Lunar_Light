@@ -1,0 +1,8 @@
+{
+  "name": "Lunar Light Awakening",
+  "description": "A modern, ethereal sanctuary for wellness, healing, and spiritual growth. Explore sacred stones, alternative health services, and community workshops.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
