@@ -6,7 +6,11 @@ import { blogPosts } from './data/blogPosts';
 const FACEBOOK_URL = 'https://www.facebook.com/lunarlightawakening';
 const EMAIL = 'lunarlightawakening@gmail.com';
 const PHONE = '715-581-7317';
-const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=121%20Skelly%20Street%2C%20Schofield%2C%20WI%2054476';
+const ADDRESS_LINE_ONE = '453 Grand Ave Suites B & C';
+const ADDRESS_LINE_TWO = 'Schofield, WI 54476';
+const MAPS_QUERY = encodeURIComponent(`${ADDRESS_LINE_ONE}, ${ADDRESS_LINE_TWO}`);
+const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`;
+const MAPS_EMBED_URL = `https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`;
 const CONTACT_MAILTO = `mailto:${EMAIL}`;
 
 const scrollToSectionId = (id: string) => {
@@ -67,8 +71,8 @@ const Navbar = () => {
     { name: 'Home', href: '#home' },
     { name: 'Offerings', href: '#offerings' },
     { name: 'Merchandise', href: '#merchandise' },
-    { name: 'Events', href: '#events' },
     { name: 'Practitioners', href: '#practitioners' },
+    { name: 'Events', href: '#events' },
     { name: 'Blog', href: '#blog' },
   ];
 
@@ -79,7 +83,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-celestial-dark/90 backdrop-blur-md py-4 shadow-xl border-b border-white/5' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'lunar-gradient-nav backdrop-blur-md py-4 shadow-xl border-b border-white/5' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full border border-gold flex items-center justify-center">
@@ -125,7 +129,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-celestial-dark border-t border-white/10 py-8 px-6 flex flex-col gap-6 lg:hidden shadow-2xl"
+            className="absolute top-full left-0 w-full lunar-gradient-section border-t border-white/10 py-8 px-6 flex flex-col gap-6 lg:hidden shadow-2xl"
           >
             {navLinks.map((link) => (
               <a 
@@ -151,7 +155,7 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Nebula Background Effect */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-celestial-dark via-indigo-950/30 to-celestial-dark" />
+        <div className="absolute inset-0 lunar-gradient-hero" />
         <motion.div 
           animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
@@ -226,7 +230,7 @@ const Hero = () => {
           className="max-w-2xl mx-auto"
         >
           <p className="font-serif italic text-xl md:text-2xl text-white/80 leading-relaxed mb-10">
-            Empowering individuals on their wellness journey through the power of stones, spirit, and community.
+            Empowering individuals on their wellness journey through the power of awareness, tools, knowledge, and community.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
@@ -236,7 +240,7 @@ const Hero = () => {
               }}
               className="px-10 py-4 bg-gold text-celestial-dark font-sans text-sm uppercase tracking-widest rounded-full hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]"
             >
-              Explore Our Stones
+              Explore Our Merchandise
             </button>
             <button 
               onClick={(e) => {
@@ -292,10 +296,10 @@ const About = () => {
                 It is our mission to empower individuals on their wellness journey by providing a variety of resources that support them in reaching their wellness goals.
               </p>
               <p>
-                We have curated an expansive line of products and alternative health resources to assist our customers in improving the overall health of their body, mind, and spirit.
+                We have curated an expansive line of products and alternative health resources to assist our customers in improving the overall health of their body, mind, and soul.
               </p>
               <p>
-                We strive to provide a peaceful, welcoming environment where customers can come to shop, learn, heal, and grow! Whether you're seeking a rare crystal for aesthetic enjoyment or looking for a transformative workshop, we are here to support your awakening.
+                We strive to provide a peaceful, welcoming environment where customers can come to shop, learn, heal, and grow! Whether you're seeking a rare crystal for aesthetic enjoyment or looking for a transformative workshop, we are here to support your journey.
               </p>
             </div>
             <a
@@ -325,26 +329,26 @@ const Offerings = () => {
       title: "Healing Arts",
       icon: <Heart className="w-8 h-8" />,
       description: "Partnered alternative health services in our serene healing spaces.",
-      items: ["Reiki", "Sound Healing", "Crystal Therapy", "Meditation"]
+      items: ["Reiki & other energy healing", "Sound & crystal therapy", "Myofascial & craniosacral therapy", "Shamanic & ancestral healing"]
     },
     {
       title: "Community Learning",
       icon: <Book className="w-8 h-8" />,
       description: "Classes and workshops in our dedicated classroom space.",
-      items: ["Journaling", "Meditation 101", "Lunar Cycles", "Herbalism"]
+      items: ["Chakras & the energy body", "Space clearing & energy protection", "Journaling & meditation", "Alternative healing methods"]
     },
     {
       title: "Artisanal Treasures",
       icon: <Flower2 className="w-8 h-8" />,
       description: "Jewelry, room decor, local art, apparel, and curated card decks.",
-      items: ["Dainty Pendants", "Tapestries", "Oracle Decks", "Handmade Soap"]
+      items: ["Oracle & tarot decks", "Space clearing supplies", "Sacred ritual supplies", "Locally made products"]
     }
   ];
 
   return (
-    <section className="py-24 bg-celestial-dark" id="offerings">
+    <section className="py-24 lunar-gradient-section" id="offerings">
       <div className="container mx-auto px-6">
-        <SectionHeading subtitle="Resources for your body, mind, and spirit" light>Our Offerings</SectionHeading>
+        <SectionHeading subtitle="Resources for your body, mind, and soul" light>Our Offerings</SectionHeading>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((cat, idx) => (
@@ -382,7 +386,7 @@ const Blog = () => {
   const categories = ["Store Stories", "Oracle Readings", "Crystals"];
 
   return (
-    <section className="py-24 bg-celestial-dark" id="blog">
+    <section className="py-24 lunar-gradient-section" id="blog">
       <div className="container mx-auto px-6">
         <SectionHeading subtitle="Sharing wisdom for your journey" light>Sacred Insights</SectionHeading>
         
@@ -446,7 +450,18 @@ const Blog = () => {
 
 // --- Events ---
 
+type ClassListing = {
+  title: string;
+  date: string;
+  time: string;
+  instructor?: string;
+  description: string;
+  registrationHref: string;
+};
+
 const Events = () => {
+  const upcomingClasses: ClassListing[] = [];
+
   const eventPaths = [
     {
       title: "Classes & Workshops",
@@ -472,6 +487,46 @@ const Events = () => {
     <section className="py-24 bg-white text-celestial-dark" id="events">
       <div className="container mx-auto px-6">
         <SectionHeading subtitle="Shop, learn, heal, and grow together">Workshops & Classes</SectionHeading>
+
+        <div className="mx-auto mb-16 max-w-5xl">
+          {upcomingClasses.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {upcomingClasses.map((classInfo, idx) => (
+                <motion.article
+                  key={`${classInfo.title}-${classInfo.date}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="rounded-2xl border border-gray-100 bg-gray-50/70 p-8 shadow-sm transition-all hover:shadow-xl"
+                >
+                  <div className="mb-5 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.2em] text-gold">
+                    <span>{classInfo.date}</span>
+                    <span>{classInfo.time}</span>
+                  </div>
+                  <h3 className="mb-3 font-display text-2xl text-celestial-dark">{classInfo.title}</h3>
+                  {classInfo.instructor && (
+                    <p className="mb-4 text-xs uppercase tracking-[0.2em] text-celestial-dark/45">{classInfo.instructor}</p>
+                  )}
+                  <p className="mb-7 font-serif text-base leading-relaxed text-gray-600">{classInfo.description}</p>
+                  <a
+                    href={classInfo.registrationHref}
+                    className="inline-flex items-center gap-3 border-b border-gold/50 pb-1 text-xs uppercase tracking-widest text-gold transition-colors hover:border-celestial-dark hover:text-celestial-dark"
+                  >
+                    Class Details <ArrowRight className="h-3 w-3" />
+                  </a>
+                </motion.article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-gray-100 bg-gray-50/70 p-8 text-center shadow-sm">
+              <h3 className="mb-4 font-display text-2xl text-celestial-dark">Upcoming class details are being finalized.</h3>
+              <p className="mx-auto max-w-2xl font-serif text-base leading-relaxed text-gray-600">
+                New workshops and class details will be posted here as soon as dates, instructors, and registration information are confirmed.
+              </p>
+            </div>
+          )}
+        </div>
         
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {eventPaths.map((event, idx) => (
@@ -561,7 +616,7 @@ const Practitioners = () => {
       image: "/practitioners/heidi-kleinschmidt.png",
       services: ["Energy Healing", "Emotional Clearing", "Somatic Movement Coaching", "Brainspotting"],
       bio: [
-        "Heidi helps clients find balance, energy, and happiness through holistic mind-body-spirit work shaped by her background as a counselor with a Native Tribe and her study with shamanic and quantum energy teachers.",
+        "Heidi helps clients find balance, energy, and happiness through holistic mind-body-soul work shaped by her background as a counselor with a Native Tribe and her study with shamanic and quantum energy teachers.",
         "Her sessions may include energy clearing on a Rainbow Chakra PEMF InfraMat, Emotion Code emotional clearing, individualized somatic movement coaching, and Brainspotting for trauma, anxiety, fears, and other stored experiences."
       ],
       website: "https://yourlovefromwithin.com",
@@ -570,7 +625,7 @@ const Practitioners = () => {
     {
       name: "Andy Colton",
       role: "Myofascial Release",
-      image: "/practitioners/andy-colton.png",
+      image: "/practitioners/andy_colton.png",
       services: ["Myofascial Release", "Craniosacral Therapy"],
       bio: [
         "Andy has been a bodyworker for more than a decade and specializes in the John F. Barnes approach to Myofascial Release.",
@@ -591,7 +646,7 @@ const Practitioners = () => {
   ];
 
   return (
-    <section className="py-24 bg-celestial-dark" id="practitioners">
+    <section className="py-24 lunar-gradient-section" id="practitioners">
       <div className="container mx-auto px-6">
         <SectionHeading subtitle="Alternative health services in our healing spaces" light>Our Practitioners</SectionHeading>
         
@@ -742,30 +797,34 @@ const Marketplace = () => {
       title: "Crystal Sanctuary",
       subtitle: "Tumbled, Raw & Freeform",
       image: "/marketplace/crystal-sanctuary.jpg",
-      description: "From raw clusters to polished points, discover stones curated for their unique energy."
+      description: "From raw clusters to polished points, discover stones curated for their unique energy.",
+      detailsHref: `${CONTACT_MAILTO}?subject=Crystal%20Sanctuary%20details`
     },
     {
-      title: "Wearable Spirit",
+      title: "Wearable Gems",
       subtitle: "Stone Jewelry",
       image: "/marketplace/wearable-spirit.png",
-      description: "Locally created pieces including gorgeous opal jewelry from Opal Gems Crafted."
+      description: "Descriptions and photos for current jewelry selections will be added as details are confirmed.",
+      detailsHref: `${CONTACT_MAILTO}?subject=Wearable%20Gems%20photos%20and%20details`
     },
     {
       title: "Healing Herbs",
-      subtitle: "Alice's Rabbit Whole",
+      subtitle: "Herbs & Wellness",
       image: "/marketplace/healing-herbs.png",
-      description: "Botanical salves, sprays, and teas to support your physical and energetic body."
+      description: "Botanical salves, sprays, and teas to support your physical and energetic body.",
+      detailsHref: `${CONTACT_MAILTO}?subject=Healing%20Herbs%20details`
     },
     {
       title: "Sacred Space",
       subtitle: "Decor & Oils",
       image: "/marketplace/sacred-space.png",
-      description: "Sun's Eye oils, sage bundles, and palo santo to clear and uplift your environment."
+      description: "Descriptions and photos for current sacred space supplies will be added as details are confirmed.",
+      detailsHref: `${CONTACT_MAILTO}?subject=Sacred%20Space%20photos%20and%20details`
     }
   ];
 
   const subCategories = [
-    "Local Art", "Eye Masks", "Bath Bombs", "Creamed Honey", "Maple Syrup", "Greeting Cards"
+    "Local Art", "Eye Masks", "Greeting Cards", "Orgonite", "Tensor Rings", "Electroculture", "Natural Fabric Products"
   ];
 
   return (
@@ -777,8 +836,7 @@ const Marketplace = () => {
           {collections.map((col, i) => (
             <motion.a
               key={i}
-              href="#contact"
-              onClick={(e) => scrollToSectionLink(e, '#contact')}
+              href={col.detailsHref}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -802,7 +860,7 @@ const Marketplace = () => {
                 </p>
                 <div className="pt-2">
                   <span className="text-xs uppercase tracking-widest border-b border-gold/50 pb-1 text-celestial-dark/60 group-hover:text-gold group-hover:border-gold transition-all">
-                    Ask About Items
+                    Request Photos & Details
                   </span>
                 </div>
               </div>
@@ -842,7 +900,7 @@ const Contact = () => {
           <div className="lg:w-1/2 w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-700">
             {/* Embedded map for the Schofield storefront. */}
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.313426732958!2d-89.60943892354832!3d44.912644271032895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8800049495acb627%3A0xe54dca7cc203c623!2s121%20Skelly%20St%2C%20Schofield%2C%20WI%2054476!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+              src={MAPS_EMBED_URL} 
               className="w-full h-full border-0" 
               allowFullScreen={false} 
               loading="lazy" 
@@ -860,8 +918,8 @@ const Contact = () => {
               <div className="space-y-4">
                 <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Address</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
-                  121 Skelly Street<br />
-                  Schofield, WI 54476
+                  {ADDRESS_LINE_ONE}<br />
+                  {ADDRESS_LINE_TWO}
                 </p>
               </div>
               <div className="space-y-4">
@@ -874,8 +932,13 @@ const Contact = () => {
               <div className="sm:col-span-2 space-y-4">
                 <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Hours</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
-                  Tuesday - Saturday: 10:00 AM - 6:00 PM<br />
-                  Sunday - Monday: Closed
+                  Thursday: 9:00 AM - 3:00 PM<br />
+                  Friday: 11:00 AM - 6:00 PM<br />
+                  Saturday: 10:00 AM - 4:00 PM<br />
+                  Sunday: Closed<br />
+                  Monday: Closed<br />
+                  Tuesday: 9:00 AM - 3:00 PM<br />
+                  Wednesday: 11:00 AM - 6:00 PM
                 </p>
               </div>
             </div>
@@ -908,7 +971,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-celestial-dark pt-24 pb-12 border-t border-white/5">
+    <footer className="lunar-gradient-section pt-24 pb-12 border-t border-white/5">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
@@ -944,7 +1007,7 @@ const Footer = () => {
             <ul className="space-y-4 font-serif text-white/60">
               <li className="flex items-start gap-4">
                 <MapPin className="text-gold shrink-0 w-5 h-5" />
-                <span>121 Skelly Street<br />Schofield, WI 54476</span>
+                <span>{ADDRESS_LINE_ONE}<br />{ADDRESS_LINE_TWO}</span>
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="text-gold shrink-0 w-5 h-5" />
@@ -960,7 +1023,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Stay Connected</h4>
             <p className="text-white/50 text-sm mb-6 leading-relaxed">
-              Join our mailing list to receive lunar updates, new stones arrivals, and event details.
+              Join our mailing list to receive lunar updates, new merchandise arrivals, and event details.
             </p>
             <form
               className="flex gap-2"
@@ -1007,13 +1070,13 @@ export default function App() {
         <About />
         <Offerings />
         <Marketplace />
-        <Events />
         <Practitioners />
+        <Events />
         <Blog />
         <Contact />
         
         {/* Testimonial/Quote */}
-        <section className="py-32 bg-celestial-dark relative">
+        <section className="py-32 lunar-gradient-section relative">
           <div className="absolute inset-0 z-0 opacity-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-gold)_0%,transparent_70%)]" />
           </div>

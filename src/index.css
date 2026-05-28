@@ -16,6 +16,25 @@
   color: #F4F4F9;
 }
 
+.lunar-gradient-section {
+  background:
+    linear-gradient(135deg, rgba(22, 70, 130, 0.94) 0%, rgba(88, 72, 166, 0.92) 52%, rgba(142, 92, 190, 0.9) 100%),
+    var(--color-celestial-dark);
+}
+
+.lunar-gradient-nav {
+  background:
+    linear-gradient(135deg, rgba(18, 52, 100, 0.92) 0%, rgba(70, 57, 145, 0.9) 55%, rgba(110, 70, 164, 0.9) 100%),
+    var(--color-celestial-dark);
+}
+
+.lunar-gradient-hero {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(133, 160, 255, 0.25), transparent 32%),
+    radial-gradient(circle at 82% 26%, rgba(205, 154, 255, 0.22), transparent 34%),
+    linear-gradient(145deg, #183d73 0%, #5148a5 48%, #8d5fbb 100%);
+}
+
 .perspective-1000 {
   perspective: 1000px;
 }

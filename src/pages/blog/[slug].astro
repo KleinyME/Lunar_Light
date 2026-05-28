@@ -29,7 +29,7 @@ const pageDescription = post.excerpt;
     <title>{pageTitle}</title>
   </head>
   <body class="bg-celestial-dark text-white font-sans selection:bg-gold selection:text-celestial-dark">
-    <header class="border-b border-white/10 bg-celestial-dark/95">
+    <header class="border-b border-white/10 lunar-gradient-nav">
       <nav class="container mx-auto flex items-center justify-between px-6 py-5">
         <a href="/" class="flex items-center gap-3 text-gold-light">
           <img src="/logo.png" alt="Lunar Light Awakening" class="h-10 w-10 object-contain" />
@@ -46,7 +46,7 @@ const pageDescription = post.excerpt;
         <section class="relative overflow-hidden">
           <div class="absolute inset-0">
             <img src={post.image} alt="" class="h-full w-full object-cover opacity-35" referrerpolicy="no-referrer" />
-            <div class="absolute inset-0 bg-gradient-to-b from-celestial-dark/70 via-celestial-dark/85 to-celestial-dark"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-[#183d73]/70 via-[#5148a5]/85 to-[#8d5fbb]"></div>
           </div>
           <div class="container relative mx-auto px-6 py-24 text-center md:py-32">
             <p class="mb-5 text-xs uppercase tracking-[0.35em] text-gold">{post.category}</p>
@@ -112,7 +112,7 @@ const pageDescription = post.excerpt;
       </article>
     </main>
 
-    <footer class="border-t border-white/10 bg-celestial-dark px-6 py-10 text-center">
+    <footer class="border-t border-white/10 lunar-gradient-section px-6 py-10 text-center">
       <p class="text-xs uppercase tracking-[0.25em] text-white/35">
         Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
       </p>

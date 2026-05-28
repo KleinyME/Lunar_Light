@@ -35,7 +35,7 @@ export const blogPosts: BlogPost[] = [
     sections: [
       {
         paragraphs: [
-          'Have you ever experienced a transformation that changed your perspective and gave you a renewed sense of purpose? That spirit of awakening is at the heart of Lunar Light Awakening, a metaphysical crystal shop based in Wisconsin.',
+          'Have you ever experienced a transformation that changed your perspective and gave you a renewed sense of purpose? That soul of transformation is at the heart of Lunar Light Awakening, a metaphysical crystal shop based in Wisconsin.',
           "The shop's journey reflects a meaningful shift in identity, branding, and purpose while staying rooted in crystals, wellness, and a warm, welcoming experience for every visitor.",
         ],
       },
@@ -94,7 +94,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: 'The Power of Oracle Readings',
         paragraphs: [
-          'Oracle readings involve using a deck of cards or other divination tools to receive messages from the divine, spirit guides, or our higher selves. Unlike tarot readings, which follow a specific structure and symbolism, oracle readings are more intuitive and open-ended.',
+          'Oracle readings involve using a deck of cards or other divination tools to receive messages from the divine, soul guides, or our higher selves. Unlike tarot readings, which follow a specific structure and symbolism, oracle readings are more intuitive and open-ended.',
           'This allows the reader to interpret the messages based on their intuition and the unique energy of the individual seeking guidance.',
         ],
       },
@@ -104,7 +104,7 @@ export const blogPosts: BlogPost[] = [
           'Clarity and guidance: Oracle readings can help us gain clarity on a situation or decision we are facing. The messages received during a reading can offer insights and guidance that we may not have considered on our own.',
           'Self-reflection: Oracle readings encourage self-reflection and introspection. By exploring the messages and symbols in the cards, we can gain a deeper understanding of our thoughts, emotions, and beliefs.',
           'Empowerment: Oracle readings can empower us to make positive changes in our lives. The guidance received can inspire us to take action, trust our intuition, and follow our hearts.',
-          'Connection: Oracle readings can help us feel connected to something greater than ourselves. Whether we believe the messages come from spirit guides, angels, or our higher selves, the experience can be deeply comforting and reassuring.',
+          'Connection: Oracle readings can help us feel connected to something greater than ourselves. Whether we believe the messages come from soul guides, angels, or our higher selves, the experience can be deeply comforting and reassuring.',
         ],
       },
       {
