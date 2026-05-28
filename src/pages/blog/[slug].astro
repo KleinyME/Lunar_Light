@@ -28,14 +28,14 @@ const pageDescription = post.excerpt;
     <link rel="icon" type="image/png" href="/logo.png" />
     <title>{pageTitle}</title>
   </head>
-  <body class="bg-celestial-dark text-white font-sans selection:bg-gold selection:text-celestial-dark">
-    <header class="border-b border-white/10 bg-celestial-dark/95">
+  <body class="bg-celestial-dark text-parchment font-sans selection:bg-gold selection:text-celestial-dark">
+    <header class="border-b border-white/10 lunar-gradient-nav">
       <nav class="container mx-auto flex items-center justify-between px-6 py-5">
         <a href="/" class="flex items-center gap-3 text-gold-light">
           <img src="/logo.png" alt="Lunar Light Awakening" class="h-10 w-10 object-contain" />
-          <span class="font-display text-lg tracking-[0.2em]">LUNAR LIGHT</span>
+          <span class="font-display text-lg">Lunar Light</span>
         </a>
-        <a href="/blog/" class="text-xs uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-gold">
+        <a href="/blog/" class="text-xs uppercase tracking-[0.14em] text-white/65 transition-colors hover:text-gold">
           All Posts
         </a>
       </nav>
@@ -46,14 +46,14 @@ const pageDescription = post.excerpt;
         <section class="relative overflow-hidden">
           <div class="absolute inset-0">
             <img src={post.image} alt="" class="h-full w-full object-cover opacity-35" referrerpolicy="no-referrer" />
-            <div class="absolute inset-0 bg-gradient-to-b from-celestial-dark/70 via-celestial-dark/85 to-celestial-dark"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-celestial-dark/72 via-amethyst/85 to-celestial-dark"></div>
           </div>
           <div class="container relative mx-auto px-6 py-24 text-center md:py-32">
-            <p class="mb-5 text-xs uppercase tracking-[0.35em] text-gold">{post.category}</p>
+            <p class="mb-5 text-xs uppercase tracking-[0.14em] text-gold">{post.category}</p>
             <h1 class="mx-auto max-w-5xl font-display text-4xl leading-tight text-gold-light md:text-6xl">
               {post.title}
             </h1>
-            <div class="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs uppercase tracking-[0.22em] text-white/55">
+            <div class="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs uppercase tracking-[0.12em] text-white/58">
               <span>{post.author}</span>
               <time>{post.date}</time>
               <span>{post.readTime}</span>
@@ -61,10 +61,10 @@ const pageDescription = post.excerpt;
           </div>
         </section>
 
-        <section class="bg-white py-16 text-celestial-dark md:py-24">
+        <section class="lunar-light-section py-16 text-celestial-dark md:py-24">
           <div class="container mx-auto px-6">
             <div class="mx-auto max-w-3xl">
-              <p class="mb-10 border-l-2 border-gold pl-6 font-serif text-2xl italic leading-relaxed text-gray-700">
+              <p class="mb-10 border-l-2 border-gold pl-6 font-display text-2xl leading-relaxed text-celestial-dark/72">
                 {post.excerpt}
               </p>
 
@@ -73,15 +73,15 @@ const pageDescription = post.excerpt;
                   post.sections.map((section) => (
                     <section>
                       {section.heading && (
-                        <h2 class="mb-5 font-display text-2xl leading-tight text-gold md:text-3xl">{section.heading}</h2>
+                        <h2 class="mb-5 font-display text-2xl leading-tight text-celestial-dark md:text-3xl">{section.heading}</h2>
                       )}
                       {section.paragraphs?.map((paragraph) => (
-                        <p class="mb-5 font-serif text-xl leading-relaxed text-gray-700">{paragraph}</p>
+                        <p class="mb-5 text-xl leading-relaxed text-celestial-dark/72">{paragraph}</p>
                       ))}
                       {section.list && (
                         <ul class="space-y-4">
                           {section.list.map((item) => (
-                            <li class="border-l border-gold/40 pl-5 font-serif text-xl leading-relaxed text-gray-700">
+                            <li class="border-l border-gold/40 pl-5 text-xl leading-relaxed text-celestial-dark/72">
                               {item}
                             </li>
                           ))}
@@ -112,7 +112,7 @@ const pageDescription = post.excerpt;
       </article>
     </main>
 
-    <footer class="border-t border-white/10 bg-celestial-dark px-6 py-10 text-center">
+    <footer class="border-t border-white/10 lunar-gradient-section px-6 py-10 text-center">
       <p class="text-xs uppercase tracking-[0.25em] text-white/35">
         Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
       </p>

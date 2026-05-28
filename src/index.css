@@ -1,31 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Marcellus&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
-  --font-display: "Cinzel", serif;
-  
-  --color-celestial-dark: #0A0C1B;
-  --color-gold: #D4AF37;
-  --color-gold-light: #F2D06B;
+  --font-sans: "Alegreya Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Marcellus", Georgia, serif;
+  --font-display: "Marcellus", Georgia, serif;
+
+  --color-celestial-dark: oklch(17% 0.035 316);
+  --color-gold: oklch(72% 0.12 82);
+  --color-gold-light: oklch(86% 0.075 86);
+  --color-parchment: oklch(95% 0.018 78);
+  --color-parchment-deep: oklch(89% 0.027 78);
+  --color-ink-soft: oklch(27% 0.04 315);
+  --color-sage: oklch(63% 0.055 145);
+  --color-amethyst: oklch(34% 0.07 315);
 }
 
 :root {
   background-color: var(--color-celestial-dark);
-  color: #F4F4F9;
+  color: oklch(94% 0.018 78);
+  font-kerning: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-celestial-dark);
+}
+
+body,
+button,
+input {
+  font-optical-sizing: auto;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li,
+blockquote {
+  text-wrap: pretty;
+}
+
+a,
+button,
+input {
+  outline-offset: 4px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-gold-light);
+}
+
+.lunar-gradient-section {
+  background:
+    radial-gradient(circle at 82% 12%, oklch(50% 0.08 82 / 0.18), transparent 26rem),
+    linear-gradient(135deg, oklch(21% 0.04 316) 0%, oklch(25% 0.055 322) 48%, oklch(30% 0.045 282) 100%),
+    var(--color-celestial-dark);
+}
+
+.lunar-gradient-nav {
+  background:
+    linear-gradient(135deg, oklch(18% 0.035 316 / 0.94) 0%, oklch(25% 0.05 315 / 0.92) 100%),
+    var(--color-celestial-dark);
+}
+
+.lunar-gradient-hero {
+  background:
+    radial-gradient(circle at 18% 18%, oklch(72% 0.09 82 / 0.22), transparent 26rem),
+    radial-gradient(circle at 78% 22%, oklch(56% 0.08 315 / 0.24), transparent 30rem),
+    linear-gradient(145deg, oklch(18% 0.04 316) 0%, oklch(27% 0.055 314) 52%, oklch(36% 0.04 260) 100%);
+}
+
+.lunar-light-section {
+  background:
+    radial-gradient(circle at top left, oklch(84% 0.06 82 / 0.2), transparent 26rem),
+    var(--color-parchment);
+}
+
+.mineral-panel {
+  background: oklch(25% 0.04 316 / 0.82);
+  border: 1px solid oklch(84% 0.075 86 / 0.18);
+}
+
+.soft-card {
+  background: oklch(98% 0.012 78);
+  border: 1px solid oklch(83% 0.023 78);
 }
 
 .perspective-1000 {
   perspective: 1000px;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.text-shadow-gold {
+  text-shadow: 0 0 18px oklch(72% 0.12 82 / 0.35);
 }
 
-.text-shadow-gold {
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+.grain-overlay {
+  background-image:
+    linear-gradient(oklch(95% 0.02 78 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(95% 0.02 78 / 0.03) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
