@@ -13,8 +13,27 @@ import '../index.css';
     />
     <link rel="icon" type="image/png" href="/logo.png" />
     <title>Lunar Light Awakening | Wellness, Stones & Sacred Space</title>
+    <link rel="canonical" href="https://lunarlightawakening.com/" />
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Lunar Light Awakening",
+        "url": "https://lunarlightawakening.com/",
+        "telephone": "715-581-7317",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "121 Skelly Street",
+          "addressLocality": "Schofield",
+          "addressRegion": "WI",
+          "postalCode": "54476",
+          "addressCountry": "US"
+        },
+        "description": "Wellness and crystal shop in Schofield, WI offering stones, jewelry, herbal products, workshops, and practitioner services including Reiki, sound healing, and crystal therapy."
+      }
+    </script>
   </head>
   <body>
-    <App client:only="react" />
+    <App client:load />
   </body>
 </html>
