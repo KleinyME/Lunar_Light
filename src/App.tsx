@@ -42,7 +42,7 @@ const SectionHeading = ({ children, subtitle, light = false }: { children: React
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className={`font-serif italic text-lg max-w-2xl mx-auto ${light ? 'text-white/70' : 'text-gray-400'}`}
+        className={`font-serif italic text-lg max-w-2xl mx-auto ${light ? 'text-white/70' : 'text-gray-600'}`}
       >
         {subtitle}
       </motion.p>
@@ -79,7 +79,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-celestial-dark/90 backdrop-blur-md py-4 shadow-xl border-b border-white/5' : 'bg-transparent py-6'}`}>
+    <nav aria-label="Primary" className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-celestial-dark/90 backdrop-blur-md py-4 shadow-xl border-b border-white/5' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full border border-gold flex items-center justify-center">
@@ -113,7 +113,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle navigation menu">
+        <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle navigation menu" aria-expanded={isMenuOpen} aria-controls="mobile-nav">
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -125,6 +125,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
+            id="mobile-nav"
             className="absolute top-full left-0 w-full bg-celestial-dark border-t border-white/10 py-8 px-6 flex flex-col gap-6 lg:hidden shadow-2xl"
           >
             {navLinks.map((link) => (
@@ -208,9 +209,9 @@ const Hero = () => {
               />
               <div className="fallback-logo hidden flex flex-col items-center justify-center">
                 <Moon size={64} className="mb-4 text-gold drop-shadow-lg" />
-                <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-widest text-shadow-gold">
+                <div className="font-display text-4xl sm:text-5xl lg:text-7xl tracking-widest text-shadow-gold">
                   LUNAR <br /> LIGHT
-                </h1>
+                </div>
                 <p className="mt-4 font-sans text-xs sm:text-sm tracking-[0.5em] uppercase text-gold/80">
                   Awakening
                 </p>
@@ -219,6 +220,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
+        <h1 className="sr-only">Lunar Light Awakening &mdash; Wellness and Crystal Shop in Schofield, Wisconsin</h1>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -286,7 +288,7 @@ const About = () => {
             </motion.div>
           </div>
           <div className="lg:w-1/2">
-            <h2 className="font-display text-4xl mb-6 text-gold">Our Mission</h2>
+            <h2 className="font-display text-4xl mb-6 text-gold-deep">Our Mission</h2>
             <div className="space-y-6 font-serif text-lg leading-relaxed text-gray-700">
               <p>
                 It is our mission to empower individuals on their wellness journey by providing a variety of resources that support them in reaching their wellness goals.
@@ -500,8 +502,8 @@ const Events = () => {
         </div>
         
         <div className="text-center mt-16">
-          <p className="font-serif text-gray-500 mb-6 italic">Dates move quickly; contact the shop for the current class and workshop schedule.</p>
-          <a href="#contact" onClick={(e) => scrollToSectionLink(e, '#contact')} className="text-gold font-display text-xs tracking-widest border-b border-gold pb-1 hover:text-celestial-dark hover:border-celestial-dark transition-all">
+          <p className="font-serif text-gray-600 mb-6 italic">Dates move quickly; contact the shop for the current class and workshop schedule.</p>
+          <a href="#contact" onClick={(e) => scrollToSectionLink(e, '#contact')} className="text-gold-deep font-display text-xs tracking-widest border-b border-gold pb-1 hover:text-celestial-dark hover:border-celestial-dark transition-all">
             Contact the Shop
           </a>
         </div>
@@ -801,7 +803,7 @@ const Marketplace = () => {
                   {col.description}
                 </p>
                 <div className="pt-2">
-                  <span className="text-xs uppercase tracking-widest border-b border-gold/50 pb-1 text-celestial-dark/60 group-hover:text-gold group-hover:border-gold transition-all">
+                  <span className="text-xs uppercase tracking-widest border-b border-gold/50 pb-1 text-celestial-dark/80 group-hover:text-gold-deep group-hover:border-gold transition-all">
                     Ask About Items
                   </span>
                 </div>
@@ -813,14 +815,14 @@ const Marketplace = () => {
         {/* Local Artisans Pill List */}
         <div className="border-t border-gray-100 pt-16">
           <div className="text-center mb-10">
-            <h4 className="font-display text-gold uppercase tracking-[0.3em] text-sm">Support Local Artisans</h4>
+            <h4 className="font-display text-gold-deep uppercase tracking-[0.3em] text-sm">Support Local Artisans</h4>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {subCategories.map((cat, i) => (
               <motion.div 
                 key={i}
                 whileHover={{ scale: 1.05 }}
-                className="px-8 py-3 bg-gray-50 border border-gray-100 rounded-full text-celestial-dark/70 font-sans text-xs uppercase tracking-widest hover:bg-gold hover:text-white hover:border-gold transition-all cursor-default"
+                className="px-8 py-3 bg-gray-50 border border-gray-100 rounded-full text-celestial-dark/80 font-sans text-xs uppercase tracking-widest hover:bg-gold hover:text-white hover:border-gold transition-all cursor-default"
               >
                 {cat}
               </motion.div>
@@ -842,6 +844,7 @@ const Contact = () => {
           <div className="lg:w-1/2 w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-700">
             {/* Embedded map for the Schofield storefront. */}
             <iframe 
+              title="Map to 121 Skelly Street, Schofield, WI 54476"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.313426732958!2d-89.60943892354832!3d44.912644271032895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8800049495acb627%3A0xe54dca7cc203c623!2s121%20Skelly%20St%2C%20Schofield%2C%20WI%2054476!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
               className="w-full h-full border-0" 
               allowFullScreen={false} 
@@ -851,28 +854,28 @@ const Contact = () => {
             <div className="absolute inset-0 pointer-events-none border-[20px] border-white/10" />
           </div>
           <div className="lg:w-1/2 space-y-10">
-            <div className="inline-block px-4 py-1 bg-gold/10 text-gold rounded-full text-[10px] uppercase tracking-widest font-bold">
+            <div className="inline-block px-4 py-1 bg-gold/10 text-gold-deep rounded-full text-[10px] uppercase tracking-widest font-bold">
               Visit Our Sanctuary
             </div>
             <h2 className="font-display text-5xl text-celestial-dark leading-tight">We look forward to <br /><span className="text-gold italic font-serif">welcoming you.</span></h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6">
               <div className="space-y-4">
-                <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Address</h4>
+                <h4 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Address</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
                   121 Skelly Street<br />
                   Schofield, WI 54476
                 </p>
               </div>
               <div className="space-y-4">
-                <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Connect</h4>
+                <h4 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Connect</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
                   <a href={`tel:+1${PHONE.replaceAll('-', '')}`} className="hover:text-gold transition-colors">(715) 581-7317</a><br />
                   <a href={CONTACT_MAILTO} className="hover:text-gold transition-colors">{EMAIL}</a>
                 </p>
               </div>
               <div className="sm:col-span-2 space-y-4">
-                <h4 className="font-display text-xs uppercase tracking-widest text-gold italic">Hours</h4>
+                <h4 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Hours</h4>
                 <p className="text-gray-600 font-serif leading-relaxed">
                   Tuesday - Saturday: 10:00 AM - 6:00 PM<br />
                   Sunday - Monday: Closed
@@ -973,11 +976,12 @@ const Footer = () => {
             >
               <input 
                 type="email" 
+                aria-label="Email address for the mailing list"
                 placeholder="Your email" 
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                className="bg-white/5 border border-white/10 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-gold transition-all flex-grow"
+                className="bg-white/5 border border-white/10 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-gold focus-visible:ring-2 focus-visible:ring-gold transition-all flex-grow"
               />
               <button type="submit" className="w-12 h-12 rounded-full bg-gold text-celestial-dark flex items-center justify-center hover:bg-gold-light transition-all shrink-0" aria-label="Join mailing list">
                 <Sparkles size={18} />
@@ -987,8 +991,8 @@ const Footer = () => {
         </div>
 
         <div className="pt-12 border-t border-white/5 text-center">
-          <p className="text-white/30 text-xs uppercase tracking-[0.2em]">
-            Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
+          <p className="text-white/60 text-xs uppercase tracking-[0.2em]">
+            Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved. <a href="/privacy/" className="underline decoration-white/40 underline-offset-4 hover:text-gold transition-colors">Privacy Policy</a>
           </p>
         </div>
       </div>
@@ -1001,8 +1005,9 @@ const Footer = () => {
 export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-gold selection:text-celestial-dark overflow-x-hidden">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:bg-gold focus:text-celestial-dark focus:px-5 focus:py-2 focus:rounded-full">Skip to main content</a>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <About />
         <Offerings />
@@ -1028,7 +1033,7 @@ export default function App() {
               <blockquote className="font-serif italic text-3xl md:text-5xl text-gold-light leading-snug mb-10">
                 "A peaceful, welcoming environment where customers can come to shop, learn, heal, and grow."
               </blockquote>
-              <cite className="font-display tracking-[0.3em] text-white/40 uppercase text-sm block">
+              <cite className="font-display tracking-[0.3em] text-white/60 uppercase text-sm block">
                 Lunar Light Awakening
               </cite>
             </motion.div>

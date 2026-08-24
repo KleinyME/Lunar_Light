@@ -1,0 +1,76 @@
+---
+import '../index.css';
+
+const pageTitle = 'Privacy Policy | Lunar Light Awakening';
+const pageDescription =
+  'How Lunar Light Awakening handles the small amount of visitor information it receives: mailing list emails, phone calls, and nothing sold to anyone.';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDescription} />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>{pageTitle}</title>
+    <link rel="canonical" href="https://lunarlightawakening.com/privacy/" />
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body class="bg-celestial-dark text-white font-sans selection:bg-gold selection:text-celestial-dark">
+    <header class="border-b border-white/10 bg-celestial-dark/95">
+      <nav class="container mx-auto flex items-center justify-between px-6 py-5" aria-label="Primary">
+        <a href="/" class="flex items-center gap-3 text-gold-light">
+          <img src="/logo.png" alt="Lunar Light Awakening" class="h-10 w-10 object-contain" />
+          <span class="font-display text-lg tracking-[0.2em]">LUNAR LIGHT</span>
+        </a>
+        <a href="/" class="text-xs uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-gold">
+          Back Home
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="bg-white py-20 text-celestial-dark">
+        <div class="container mx-auto max-w-3xl px-6">
+          <h1 class="font-display text-4xl text-celestial-dark md:text-5xl">Privacy Policy</h1>
+          <div class="mt-10 space-y-6 font-serif text-lg leading-relaxed text-gray-700">
+            <p>
+              Lunar Light Awakening is a small shop in Schofield, Wisconsin, and this website works like the shop does:
+              you can look around without telling us anything about yourself.
+            </p>
+            <p>
+              <strong>What we collect.</strong> The site itself has no accounts, no checkout, and no tracking pixels of
+              our own. If you join the mailing list, the signup opens an email from your own mail app, and the address
+              you send is used only to send shop updates. If you call or email the shop, we see what you send us and
+              use it to answer you.
+            </p>
+            <p>
+              <strong>What we never do.</strong> We do not sell, rent, or trade your contact information with anyone.
+              We do not send your information to advertisers.
+            </p>
+            <p>
+              <strong>Third parties.</strong> The site is hosted by Vercel and embeds a Google Map of our storefront;
+              those services receive the ordinary technical data any web request carries, under their own privacy
+              policies.
+            </p>
+            <p>
+              <strong>Leaving the list.</strong> Reply to any mailing-list email, or write to
+              <a href="mailto:lunarlightawakening@gmail.com" class="text-gold-deep underline underline-offset-4">lunarlightawakening@gmail.com</a>,
+              and we will remove you promptly.
+            </p>
+            <p>
+              Questions? Call <a href="tel:+17155817317" class="text-gold-deep underline underline-offset-4">715-581-7317</a>
+              or visit us at 121 Skelly Street, Schofield, WI 54476.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-celestial-dark px-6 py-10 text-center">
+      <p class="text-xs uppercase tracking-[0.25em] text-white/60">
+        Copyright {new Date().getFullYear()} Lunar Light Awakening. All Rights Reserved.
+      </p>
+    </footer>
+  </body>
+</html>

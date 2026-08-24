@@ -16,8 +16,21 @@ if (!post) {
   return Astro.redirect('/blog/');
 }
 
-const pageTitle = `${post.title} | Lunar Light Awakening`;
+const suffixedTitle = `${post.title} | Lunar Light Awakening`;
+const pageTitle = suffixedTitle.length <= 65 ? suffixedTitle : post.title;
 const pageDescription = post.excerpt;
+const canonicalUrl = `https://lunarlightawakening.com/blog/${post.slug}/`;
+const imageUrl = `https://lunarlightawakening.com${post.image}`;
+const blogPostingJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt,
+  image: imageUrl,
+  author: { '@type': 'Person', name: post.author },
+  publisher: { '@type': 'Organization', name: 'Lunar Light Awakening', url: 'https://lunarlightawakening.com/' },
+  mainEntityOfPage: canonicalUrl,
+});
 ---
 
 <html lang="en">
@@ -27,6 +40,19 @@ const pageDescription = post.excerpt;
     <meta name="description" content={pageDescription} />
     <link rel="icon" type="image/png" href="/logo.png" />
     <title>{pageTitle}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Lunar Light Awakening" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={post.imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script type="application/ld+json" set:html={blogPostingJson} />
   </head>
   <body class="bg-celestial-dark text-white font-sans selection:bg-gold selection:text-celestial-dark">
     <header class="border-b border-white/10 bg-celestial-dark/95">
@@ -45,7 +71,7 @@ const pageDescription = post.excerpt;
       <article>
         <section class="relative overflow-hidden">
           <div class="absolute inset-0">
-            <img src={post.image} alt="" class="h-full w-full object-cover opacity-35" referrerpolicy="no-referrer" />
+            <img src={post.image} alt={post.imageAlt} class="h-full w-full object-cover opacity-35" referrerpolicy="no-referrer" />
             <div class="absolute inset-0 bg-gradient-to-b from-celestial-dark/70 via-celestial-dark/85 to-celestial-dark"></div>
           </div>
           <div class="container relative mx-auto px-6 py-24 text-center md:py-32">

@@ -9,6 +9,23 @@
   --color-celestial-dark: #0A0C1B;
   --color-gold: #D4AF37;
   --color-gold-light: #F2D06B;
+  --color-gold-deep: #8a6a12;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 :root {
