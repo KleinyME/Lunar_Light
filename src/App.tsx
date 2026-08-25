@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <nav aria-label="Primary" className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-celestial-dark/90 backdrop-blur-md py-4 shadow-xl border-b border-white/5' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="flex items-center gap-3">
+        <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="flex items-center gap-3" aria-label="Lunar Light Awakening home">
           <div className="w-10 h-10 rounded-full border border-gold flex items-center justify-center">
             <Moon className="w-5 h-5 text-gold" />
           </div>
@@ -280,7 +280,7 @@ const About = () => {
               className="relative p-2"
             >
               <img 
-                src="/about/ann.png" 
+                src="/about/ann.webp" 
                 alt="Ann from Lunar Light Awakening" 
                 className="rounded-2xl shadow-2xl relative z-10 w-full max-h-[620px] object-cover object-top"
               />
@@ -302,7 +302,7 @@ const About = () => {
             </div>
             <a
               href="/blog/the-heart-of-lunar-light-awakening/"
-              className="mt-10 inline-flex items-center gap-4 text-gold hover:text-celestial-dark transition-all font-display tracking-widest border-b border-gold pb-2 group"
+              className="mt-10 inline-flex items-center gap-4 text-gold-deep hover:text-celestial-dark transition-all font-display tracking-widest border-b border-gold pb-2 group"
             >
               Learn More About Our Journey <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </a>
@@ -437,7 +437,7 @@ const Blog = () => {
         </div>
 
         <div className="text-center mt-16">
-          <a href="/blog/" className="text-white/40 hover:text-gold transition-colors uppercase tracking-[0.3em] text-xs inline-flex items-center gap-3 mx-auto">
+          <a href="/blog/" className="text-white/70 hover:text-gold transition-colors uppercase tracking-[0.3em] text-xs inline-flex items-center gap-3 mx-auto">
             View All Wisdom <ArrowRight size={14} />
           </a>
         </div>
@@ -548,7 +548,7 @@ const Practitioners = () => {
     {
       name: "Lisa Bernarde",
       role: "Graceful Guidance",
-      image: "/practitioners/lisa-bernarde.png",
+      image: "/practitioners/lisa-bernarde.webp",
       services: ["Reiki", "Quantum Healing", "Hypnotherapy", "Bioresonance Healing"],
       bio: [
         "Lisa brings deep compassion to her work and supports clients through Reiki, quantum healing, hypnotherapy, bioresonance, and vibrational sound practices.",
@@ -560,7 +560,7 @@ const Practitioners = () => {
     {
       name: "Heidi Kleinschmidt",
       role: "Your Love from Within",
-      image: "/practitioners/heidi-kleinschmidt.png",
+      image: "/practitioners/heidi-kleinschmidt.webp",
       services: ["Energy Healing", "Emotional Clearing", "Somatic Movement Coaching", "Brainspotting"],
       bio: [
         "Heidi helps clients find balance, energy, and happiness through holistic mind-body-spirit work shaped by her background as a counselor with a Native Tribe and her study with shamanic and quantum energy teachers.",
@@ -572,7 +572,7 @@ const Practitioners = () => {
     {
       name: "Andy Colton",
       role: "Myofascial Release",
-      image: "/practitioners/andy-colton.png",
+      image: "/practitioners/andy-colton.webp",
       services: ["Myofascial Release", "Craniosacral Therapy"],
       bio: [
         "Andy has been a bodyworker for more than a decade and specializes in the John F. Barnes approach to Myofascial Release.",
@@ -634,7 +634,7 @@ const Practitioners = () => {
               <button
                 type="button"
                 onClick={() => setSelectedMember(member)}
-                className="mt-8 inline-flex px-6 py-2 border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-white/40 hover:text-gold hover:border-gold transition-all"
+                className="mt-8 inline-flex px-6 py-2 border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-white/70 hover:text-gold hover:border-gold transition-all"
                 aria-haspopup="dialog"
               >
                 View Details
@@ -689,7 +689,7 @@ const Practitioners = () => {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-celestial-dark/80 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">
-                    <p className="mb-2 text-xs uppercase tracking-[0.3em] text-gold">{selectedMember.role}</p>
+                    <p className="mb-2 text-xs uppercase tracking-[0.3em] text-gold-deep">{selectedMember.role}</p>
                     <h3 id="practitioner-dialog-title" className="font-display text-4xl text-gold-light">
                       {selectedMember.name}
                     </h3>
@@ -698,7 +698,7 @@ const Practitioners = () => {
 
                 <div className="space-y-8 p-8 md:p-10">
                   <div>
-                    <h4 className="mb-4 font-display text-xs uppercase tracking-[0.3em] text-gold">Services</h4>
+                    <h4 className="mb-4 font-display text-xs uppercase tracking-[0.3em] text-gold-deep">Services</h4>
                     <div className="flex flex-wrap gap-3">
                       {selectedMember.services.map((service) => (
                         <span key={service} className="rounded-full border border-gold/25 px-4 py-2 text-xs uppercase tracking-widest text-celestial-dark/70">
@@ -743,25 +743,25 @@ const Marketplace = () => {
     {
       title: "Crystal Sanctuary",
       subtitle: "Tumbled, Raw & Freeform",
-      image: "/marketplace/crystal-sanctuary.jpg",
+      image: "/marketplace/crystal-sanctuary.webp",
       description: "From raw clusters to polished points, discover stones curated for their unique energy."
     },
     {
       title: "Wearable Spirit",
       subtitle: "Stone Jewelry",
-      image: "/marketplace/wearable-spirit.png",
+      image: "/marketplace/wearable-spirit.webp",
       description: "Locally created pieces including gorgeous opal jewelry from Opal Gems Crafted."
     },
     {
       title: "Healing Herbs",
       subtitle: "Alice's Rabbit Whole",
-      image: "/marketplace/healing-herbs.png",
+      image: "/marketplace/healing-herbs.webp",
       description: "Botanical salves, sprays, and teas to support your physical and energetic body."
     },
     {
       title: "Sacred Space",
       subtitle: "Decor & Oils",
-      image: "/marketplace/sacred-space.png",
+      image: "/marketplace/sacred-space.webp",
       description: "Sun's Eye oils, sage bundles, and palo santo to clear and uplift your environment."
     }
   ];
@@ -797,7 +797,7 @@ const Marketplace = () => {
                 <div className="absolute inset-0 bg-celestial-dark/20 group-hover:bg-transparent transition-colors" />
               </div>
               <div className="w-full md:w-1/2 space-y-4">
-                <span className="text-gold font-display text-xs tracking-widest uppercase">{col.subtitle}</span>
+                <span className="text-gold-deep font-display text-xs tracking-widest uppercase">{col.subtitle}</span>
                 <h3 className="text-3xl font-display text-celestial-dark">{col.title}</h3>
                 <p className="font-serif text-gray-600 leading-relaxed text-sm">
                   {col.description}
@@ -815,7 +815,7 @@ const Marketplace = () => {
         {/* Local Artisans Pill List */}
         <div className="border-t border-gray-100 pt-16">
           <div className="text-center mb-10">
-            <h4 className="font-display text-gold-deep uppercase tracking-[0.3em] text-sm">Support Local Artisans</h4>
+            <h3 className="font-display text-gold-deep uppercase tracking-[0.3em] text-sm">Support Local Artisans</h3>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {subCategories.map((cat, i) => (
@@ -857,25 +857,25 @@ const Contact = () => {
             <div className="inline-block px-4 py-1 bg-gold/10 text-gold-deep rounded-full text-[10px] uppercase tracking-widest font-bold">
               Visit Our Sanctuary
             </div>
-            <h2 className="font-display text-5xl text-celestial-dark leading-tight">We look forward to <br /><span className="text-gold italic font-serif">welcoming you.</span></h2>
+            <h2 className="font-display text-5xl text-celestial-dark leading-tight">We look forward to <br /><span className="text-gold-deep italic font-serif">welcoming you.</span></h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6">
               <div className="space-y-4">
-                <h4 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Address</h4>
+                <h3 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Address</h3>
                 <p className="text-gray-600 font-serif leading-relaxed">
                   121 Skelly Street<br />
                   Schofield, WI 54476
                 </p>
               </div>
               <div className="space-y-4">
-                <h4 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Connect</h4>
+                <h3 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Connect</h3>
                 <p className="text-gray-600 font-serif leading-relaxed">
                   <a href={`tel:+1${PHONE.replaceAll('-', '')}`} className="hover:text-gold transition-colors">(715) 581-7317</a><br />
                   <a href={CONTACT_MAILTO} className="hover:text-gold transition-colors">{EMAIL}</a>
                 </p>
               </div>
               <div className="sm:col-span-2 space-y-4">
-                <h4 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Hours</h4>
+                <h3 className="font-display text-xs uppercase tracking-widest text-gold-deep italic">Hours</h3>
                 <p className="text-gray-600 font-serif leading-relaxed">
                   Tuesday - Saturday: 10:00 AM - 6:00 PM<br />
                   Sunday - Monday: Closed
@@ -933,7 +933,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Quick Links</h4>
+            <h3 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Quick Links</h3>
             <ul className="space-y-4">
               <li><a href="#merchandise" onClick={(e) => navLinkClick(e, '#merchandise')} className="text-white/50 hover:text-gold transition-colors text-sm uppercase tracking-widest">Merchandise</a></li>
               <li><a href="#events" onClick={(e) => navLinkClick(e, '#events')} className="text-white/50 hover:text-gold transition-colors text-sm uppercase tracking-widest">Events</a></li>
@@ -943,7 +943,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Visit Us</h4>
+            <h3 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Visit Us</h3>
             <ul className="space-y-4 font-serif text-white/60">
               <li className="flex items-start gap-4">
                 <MapPin className="text-gold shrink-0 w-5 h-5" />
@@ -961,7 +961,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Stay Connected</h4>
+            <h3 className="font-display text-gold-light mb-8 tracking-widest text-sm uppercase">Stay Connected</h3>
             <p className="text-white/50 text-sm mb-6 leading-relaxed">
               Join our mailing list to receive lunar updates, new stones arrivals, and event details.
             </p>

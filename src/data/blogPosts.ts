@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
     date: 'Apr 17, 2024',
     author: 'Lisa Bernarde',
     readTime: '2 min read',
-    image: '/blog/heart-of-lunar-light-awakening.png',
+    image: '/blog/heart-of-lunar-light-awakening.webp',
     imageAlt: 'A warm crystal shop interior with moonstone displays, candlelight, and lunar accents.',
     sourceUrl:
       'https://lunarlightawakening.wixsite.com/luna-light-awakening/post/from-bill-s-moonstones-to-luna-light-awakening-a-journey-of-transformation',
@@ -80,7 +80,7 @@ export const blogPosts: BlogPost[] = [
     date: 'Apr 17, 2024',
     author: 'Lisa Bernarde',
     readTime: '3 min read',
-    image: '/blog/oracle-readings.png',
+    image: '/blog/oracle-readings.webp',
     imageAlt: 'An oracle reading setup with cards, crystals, candlelight, and moonlight.',
     sourceUrl:
       '/blog/unlocking-your-intuition-the-benefits-of-oracle-readings/',
@@ -138,7 +138,7 @@ export const blogPosts: BlogPost[] = [
     date: 'Apr 17, 2024',
     author: 'Lisa Bernarde',
     readTime: '3 min read',
-    image: '/blog/power-of-crystals.png',
+    image: '/blog/power-of-crystals.webp',
     imageAlt: 'A luminous collection of crystals arranged with herbs, linen, and soft morning light.',
     sourceUrl: '/blog/the-power-of-crystals/',
     sections: [
